@@ -1,0 +1,96 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.140'
+}
+
+group = mod_group_id
+version = mod_version
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    maven {
+        name = 'RyanHCode'
+        url = 'https://maven.ryanhcode.dev/releases'
+    }
+    maven {
+        name = 'Create'
+        url = 'https://maven.createmod.net'
+    }
+}
+
+configurations {
+    localRuntime
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+dependencies {
+    localRuntime "maven.modrinth:create-aeronautics:${create_aeronautics_version}+mc${minecraft_version}"
+    localRuntime "maven.modrinth:sable:${sable_version}+mc${minecraft_version}"
+    localRuntime "maven.modrinth:create:${create_version}+mc${minecraft_version}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+}
+
+neoForge {
+    version = neo_version
+
+    runs {
+        configureEach {
+            systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
+        }
+        client {
+            client()
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var properties = [
+        minecraft_version      : minecraft_version,
+        minecraft_version_range: minecraft_version_range,
+        neo_version             : neo_version,
+        neo_version_range       : neo_version_range,
+        loader_version_range   : loader_version_range,
+        simulated_version_range: simulated_version_range,
+        sable_version_range    : sable_version_range,
+        create_version_range   : create_version_range,
+        mod_id                  : mod_id,
+        mod_name                : mod_name,
+        mod_version             : mod_version
+    ]
+    inputs.properties properties
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand properties
+    }
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
+}
