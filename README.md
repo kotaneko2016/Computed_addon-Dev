@@ -8,6 +8,8 @@ The project contains the mod entry point, a small, deliberately restricted text-
 
 The in-game editor, placeable blocks, telemetry collection, display rendering, and Create Redstone Link integration are not wired up yet. In particular, telemetry values must be connected to Aeronautics/Simulated's runtime API before aircraft-specific sensors can work.
 
+The first placeable content is the Code Workplace block. Its 5-by-4 Create Mechanical Crafter recipe uses three Create Redstone Links, two Precision Mechanisms, four Diamond Blocks, two Copper Blocks, and three buttons.
+
 Scripts currently support numeric variables, arithmetic, comparisons, `abs`, `min`, `max`, `clamp`, display lines, and a redstone output from 0 to 15:
 
 ```text

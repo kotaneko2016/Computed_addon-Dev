@@ -41,6 +41,7 @@ dependencies {
     localRuntime "maven.modrinth:sable:${sable_version}+mc${minecraft_version}"
     localRuntime "maven.modrinth:create:${create_version}+mc${minecraft_version}"
 
+    testImplementation 'com.google.code.gson:gson:2.11.0'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.11.4'
 }
 

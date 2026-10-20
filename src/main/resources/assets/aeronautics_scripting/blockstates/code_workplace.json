@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "aeronautics_scripting:block/code_workplace"
+    }
+  }
+}

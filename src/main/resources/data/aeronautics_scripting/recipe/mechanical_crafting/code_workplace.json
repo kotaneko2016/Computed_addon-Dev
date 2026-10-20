@@ -1,0 +1,32 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "create:redstone_link"
+    },
+    "M": {
+      "item": "create:precision_mechanism"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "B": {
+      "tag": "minecraft:buttons"
+    }
+  },
+  "pattern": [
+    " RRR ",
+    "MDCDM",
+    "BBBDD",
+    "  C  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "aeronautics_scripting:code_workplace"
+  }
+}
