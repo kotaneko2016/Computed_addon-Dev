@@ -1,6 +1,7 @@
 package dev.kotan.aeronautics_scripting;
 
 import dev.kotan.aeronautics_scripting.content.ModContent;
+import dev.kotan.aeronautics_scripting.network.CodeWorkplaceNetworking;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
@@ -11,5 +12,6 @@ public final class AeronauticsScripting {
 
     public AeronauticsScripting(IEventBus modEventBus, ModContainer container) {
         ModContent.register(modEventBus);
+        CodeWorkplaceNetworking.register(modEventBus);
     }
 }

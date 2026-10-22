@@ -1,4 +1,19 @@
 {
   "block.aeronautics_scripting.code_workplace": "Code Workplace",
-  "itemGroup.aeronautics_scripting": "Aeronautics Scripting"
+  "itemGroup.aeronautics_scripting": "Aeronautics Scripting",
+  "screen.aeronautics_scripting.code_workplace.title": "Code Workplace",
+  "screen.aeronautics_scripting.code_workplace.ready": "Add blocks or enter one command per line.",
+  "screen.aeronautics_scripting.code_workplace.line_input": "Command",
+  "screen.aeronautics_scripting.code_workplace.line_hint": "e.g. screen \"Altitude\" = altitude",
+  "screen.aeronautics_scripting.code_workplace.add_line": "Add line",
+  "screen.aeronautics_scripting.code_workplace.remove_line": "Remove last",
+  "screen.aeronautics_scripting.code_workplace.save": "Save program",
+  "screen.aeronautics_scripting.code_workplace.program": "PROGRAM",
+  "screen.aeronautics_scripting.code_workplace.empty": "No blocks yet. Use a palette button below.",
+  "screen.aeronautics_scripting.code_workplace.empty_line": "Enter a command first.",
+  "screen.aeronautics_scripting.code_workplace.too_many_lines": "Program has reached the block limit.",
+  "screen.aeronautics_scripting.code_workplace.program_too_large": "Program has reached the size limit.",
+  "screen.aeronautics_scripting.code_workplace.unsaved": "Unsaved changes.",
+  "screen.aeronautics_scripting.code_workplace.saving": "Validating and saving...",
+  "screen.aeronautics_scripting.code_workplace.saved": "Program saved."
 }

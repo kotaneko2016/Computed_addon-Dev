@@ -13,6 +13,7 @@ public final class ScriptEngine {
     public static final int MAX_SOURCE_LENGTH = 8_192;
     public static final int MAX_STATEMENTS = 64;
     public static final int MAX_DISPLAY_LINES = 8;
+    public static final int MAX_EXPRESSION_DEPTH = 32;
 
     private static final Pattern VARIABLE_NAME = Pattern.compile("[A-Za-z_][A-Za-z0-9_]*");
     private static final Pattern SCREEN_STATEMENT =
@@ -110,6 +111,7 @@ public final class ScriptEngine {
         private final String source;
         private final Map<String, Double> variables;
         private int position;
+        private int nestingDepth;
 
         private ExpressionParser(String source, Map<String, Double> variables) {
             this.source = source;
@@ -184,24 +186,30 @@ public final class ScriptEngine {
 
         private double parseUnary() {
             skipWhitespace();
-            if (consume("+")) {
-                return parseUnary();
+            boolean negative = false;
+            while (consume("+") || consume("-")) {
+                if (source.charAt(position - 1) == '-') {
+                    negative = !negative;
+                }
             }
-            if (consume("-")) {
-                return -parseUnary();
-            }
-            return parsePrimary();
+            double value = parsePrimary();
+            return negative ? -value : value;
         }
 
         private double parsePrimary() {
             skipWhitespace();
             if (consume("(")) {
-                double value = parseComparison();
-                skipWhitespace();
-                if (!consume(")")) {
-                    throw error("Expected ')'");
+                enterNesting();
+                try {
+                    double value = parseComparison();
+                    skipWhitespace();
+                    if (!consume(")")) {
+                        throw error("Expected ')'");
+                    }
+                    return value;
+                } finally {
+                    nestingDepth--;
                 }
-                return value;
             }
 
             if (position < source.length() && (Character.isDigit(source.charAt(position)) || source.charAt(position) == '.')) {
@@ -211,7 +219,12 @@ public final class ScriptEngine {
             String name = parseName();
             skipWhitespace();
             if (consume("(")) {
-                return parseFunction(name);
+                enterNesting();
+                try {
+                    return parseFunction(name);
+                } finally {
+                    nestingDepth--;
+                }
             }
 
             Double value = variables.get(name);
@@ -327,6 +340,13 @@ public final class ScriptEngine {
 
         private IllegalArgumentException error(String message) {
             return new IllegalArgumentException(message + " at column " + (position + 1));
+        }
+
+        private void enterNesting() {
+            if (++nestingDepth > MAX_EXPRESSION_DEPTH) {
+                nestingDepth--;
+                throw error("Expression exceeds maximum nesting depth of " + MAX_EXPRESSION_DEPTH);
+            }
         }
 
         private static boolean isNameStart(char character) {

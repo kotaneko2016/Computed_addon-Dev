@@ -1,4 +1,19 @@
 {
   "block.aeronautics_scripting.code_workplace": "コード作業台",
-  "itemGroup.aeronautics_scripting": "Aeronautics Scripting"
+  "itemGroup.aeronautics_scripting": "Aeronautics Scripting",
+  "screen.aeronautics_scripting.code_workplace.title": "コード作業台",
+  "screen.aeronautics_scripting.code_workplace.ready": "ブロックを追加するか、1行ずつ命令を入力します。",
+  "screen.aeronautics_scripting.code_workplace.line_input": "命令",
+  "screen.aeronautics_scripting.code_workplace.line_hint": "例: screen \"高度\" = altitude",
+  "screen.aeronautics_scripting.code_workplace.add_line": "行を追加",
+  "screen.aeronautics_scripting.code_workplace.remove_line": "最後を削除",
+  "screen.aeronautics_scripting.code_workplace.save": "プログラム保存",
+  "screen.aeronautics_scripting.code_workplace.program": "プログラム",
+  "screen.aeronautics_scripting.code_workplace.empty": "まだブロックがありません。下のボタンから追加してください。",
+  "screen.aeronautics_scripting.code_workplace.empty_line": "先に命令を入力してください。",
+  "screen.aeronautics_scripting.code_workplace.too_many_lines": "ブロック数の上限に達しました。",
+  "screen.aeronautics_scripting.code_workplace.program_too_large": "プログラムのサイズ上限に達しました。",
+  "screen.aeronautics_scripting.code_workplace.unsaved": "未保存の変更があります。",
+  "screen.aeronautics_scripting.code_workplace.saving": "検証して保存中...",
+  "screen.aeronautics_scripting.code_workplace.saved": "プログラムを保存しました。"
 }

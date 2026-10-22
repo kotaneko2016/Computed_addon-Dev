@@ -44,4 +44,22 @@ class ScriptEngineTest {
     void rejectsDivisionByZero() {
         assertThrows(ScriptException.class, () -> engine.execute("link = 1 / 0", Map.of()));
     }
+
+    @Test
+    void handlesLongUnaryChainsWithoutRecursiveStackGrowth() {
+        String expression = "+".repeat(ScriptEngine.MAX_SOURCE_LENGTH - "link = ".length() - "1".length()) + "1";
+
+        ScriptExecutionResult result = engine.execute("link = " + expression, Map.of());
+
+        assertEquals(1, result.redstonePower().orElseThrow());
+    }
+
+    @Test
+    void rejectsExcessivelyNestedExpressions() {
+        String expression = "(".repeat(ScriptEngine.MAX_EXPRESSION_DEPTH + 1)
+            + "1"
+            + ")".repeat(ScriptEngine.MAX_EXPRESSION_DEPTH + 1);
+
+        assertThrows(ScriptException.class, () -> engine.execute("link = " + expression, Map.of()));
+    }
 }
